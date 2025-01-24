@@ -11,4 +11,4 @@ postRouter.get("/", (req, res) => { // '/' means /posts inside this postRouter
 })
 
 // default export
-module.exports = postRouter // Export postRouter from this file
+module.exports = postRouter // Export postRouter from this file 
