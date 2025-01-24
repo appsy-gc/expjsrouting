@@ -1,0 +1,14 @@
+const express = require("express") // Import express
+
+const { getPosts } = require("../controllers/postControllers")
+
+const postRouter = express.Router() // Same as blueprint in flask/python
+
+// GET 
+postRouter.get("/", (req, res) => { // '/' means /posts inside this postRouter
+   const posts = getPosts
+   res.json(posts)
+})
+
+// default export
+module.exports = postRouter // Export postRouter from this file
