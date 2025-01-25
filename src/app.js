@@ -3,6 +3,7 @@ const express = require("express")
 const mongoose = require("mongoose")
 
 const postRouter = require("./routes/postRoutes")
+const categoryRouter = require("./routes/categoryRoutes")
 
 // instantiate express
 const app = express()
@@ -10,6 +11,7 @@ const app = express()
 app.use(express.json())
 
 app.use("/posts", postRouter)
+app.use("/categories", categoryRouter)
 
 // start server with two parameters; port and callback function
 app.listen(3000, async () => {
