@@ -1,21 +1,40 @@
-const posts = [
-    {
-        title: "Post 1",
-        body: "Post 1 body",
-        is_published: true
-    },
-    {
-        title: "Post 2",
-        body: "Post 2 body",
-        is_published: false
-    }
-]
+const Post = require("../models/post")
 
-function getPosts() {
+// Get data from database in the model
+async function getPosts() {
+    const posts = await Post.find() // Can filter in {is_published: true}
     return posts
 }
 
-// namex exports
+// Controller for getting single post
+async function getPost(postId) {
+    const post = await Post.findById(postId)
+    // alternatively, const post = await Post.find({ _id: postID })[0]
+    return post
+}
+
+// Controller for creating a post
+async function createPost(post) {
+    const newPost = await Post.create(post)
+    return newPost
+}
+
+async function updatePost(postId, post) {
+    // adding { new: true } will provide the updated info in the insomina output
+    const updatedPost = await Post.findByIdAndUpdate(postId, post, { new: true })
+    return updatedPost
+}
+
+async function deletePost(postId) {
+    const deletedPost = await Post.findByIdAndDelete(postId)
+    return deletedPost
+}
+
+// named exports
 module.exports = {
-    getPosts
+    getPosts,
+    getPost,
+    createPost,
+    updatePost,
+    deletePost
 } 

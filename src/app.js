@@ -7,6 +7,8 @@ const postRouter = require("./routes/postRoutes")
 // instantiate express
 const app = express()
 
+app.use(express.json())
+
 app.use("/posts", postRouter)
 
 // start server with two parameters; port and callback function
