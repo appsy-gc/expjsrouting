@@ -8,6 +8,8 @@ const {
     deleteCategory
 } = require("../controllers/categoryControllers")
 
+const checkIfAdmin = require('../middlewares/checkIfAdmin')
+
 const categoryRouter = express.Router()
 
 // GET all categories /categories
@@ -26,8 +28,10 @@ categoryRouter.get('/:catId', async (req, res) => {
     }
 })
 
+// categoryRouter.use(checkIfAdmin) for all remaining routes, or add to individual routes.
+
 // CREATE a category /categories
-categoryRouter.post('/', async (req, res) => {
+categoryRouter.post('/', checkIfAdmin, async (req, res) => {
     const bodyData = {
         title: req.body.title,
         description: req.body.description
@@ -37,7 +41,7 @@ categoryRouter.post('/', async (req, res) => {
 })
 
 // PATCH a category /categories/:id
-categoryRouter.patch('/:catId', async (req, res) => {
+categoryRouter.patch('/:catId', checkIfAdmin, async (req, res) => {
     const bodyData = {
         title: req.body.title,
         description: req.body.description
