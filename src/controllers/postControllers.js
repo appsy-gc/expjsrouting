@@ -1,4 +1,4 @@
-const Post = require("../models/post")
+const { Post } = require("../models/post")
 
 // Get data from database in the model
 async function getPosts() {
