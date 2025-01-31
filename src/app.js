@@ -1,6 +1,7 @@
 // import express
 const express = require("express")
 const mongoose = require("mongoose")
+const logger = require('./middlewares/logger')
 
 const postRouter = require("./routes/postRoutes")
 const categoryRouter = require("./routes/categoryRoutes")
@@ -9,6 +10,8 @@ const categoryRouter = require("./routes/categoryRoutes")
 const app = express()
 
 app.use(express.json())
+// all routes after logger will use the logger
+app.use(logger)
 
 app.use("/posts", postRouter)
 app.use("/categories", categoryRouter)
