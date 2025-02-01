@@ -8,6 +8,8 @@ const {
    deletePost 
 } = require("../controllers/postControllers")
 
+const auth = require('../middlewares/auth')
+
 const postRouter = express.Router() // Same as blueprint in flask/python
 
 // GET 
@@ -27,7 +29,7 @@ postRouter.get("/:postId", async (req, res) => {
 })
 
 // CREATE (POST) - /posts
-postRouter.post("/", async (req, res) => {
+postRouter.post("/", auth, async (req, res) => {
    const bodyData = {
       title: req.body.title,
       body: req.body.body,
