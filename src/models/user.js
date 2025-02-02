@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose")
 
 const UserSchema = mongoose.Schema({
     name: String,
@@ -7,6 +7,6 @@ const UserSchema = mongoose.Schema({
     is_admin: Boolean
 })
 
-const User = mongoose.model('User', UserSchema)
+const User = mongoose.model("User", UserSchema)
 
 module.exports = User

@@ -13,8 +13,11 @@ const PostSchema = mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: "Category" // this name must match the name of the model in category
     },
-    comments: [CommentSchema] // Single post with single comment
-    // comments: [CommentSchema] can be used for multiple comments in a single post (i.e., a 'list' of comments)
+    comments: [CommentSchema],
+    user_id: {
+        type: mongoose.Types.ObjectId,
+        ref: "User"
+    }
 })
 
 
