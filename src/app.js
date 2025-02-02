@@ -1,12 +1,12 @@
 // import express
 const express = require("express")
 const mongoose = require("mongoose")
-const logger = require('./middlewares/logger')
 
 const postRouter = require("./routes/postRoutes")
 const categoryRouter = require("./routes/categoryRoutes")
 const commentRouter = require("./routes/commentRoutes")
 const userRouter = require("./routes/userRoutes")
+const logger = require("./middlewares/logger")
 
 // instantiate express
 const app = express()

@@ -31,13 +31,13 @@ categoryRouter.get('/:catId', async (req, res) => {
 // categoryRouter.use(checkIfAdmin) for all remaining routes, or add to individual routes.
 
 // CREATE a category /categories
-categoryRouter.post('/', checkIfAdmin, async (req, res) => {
+categoryRouter.post("/", checkIfAdmin, async (req, res) => {
     const bodyData = {
         title: req.body.title,
         description: req.body.description
     }
     const newCategory = await createCategory(bodyData)
-    res.json(newCategory)
+    res.status(201).json(newCategory)
 })
 
 // PATCH a category /categories/:id

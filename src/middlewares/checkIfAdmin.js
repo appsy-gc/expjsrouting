@@ -1,19 +1,24 @@
-const checkIfAdmin = (req, res, next) => {
-    // if (req.headers.authorization) {
-    //     Extract token
-    //     Verify the token
-    //     Extract user id from token
-    //     get the user from the db using user id
-    //     check if user is admin or not
-    // }
-    const isAdmin = true
-    if (isAdmin) {
-        req.isAdmin = isAdmin
+const jwt = require("jsonwebtoken")
+
+const User = require("../models/user")
+
+const checkIfAdmin = async (req, res, next) => {
+    let token = req.get("authorization") // Bearer the-actual-token
+    token = token?.split(" ")?.[1] // the-actual-token
+    if (!token) {
+        return res.status(401).json({ error: "Unauthenticated" })
+    }
+    try {
+        const payload = jwt.verify(token, "secret")
+        const user = await User.findById(payload.id)
+        if (!user.is_admin) {
+            throw new Error()
+        }
+        req.userId = payload.id
         next()
-    } else {
-        res.status(403).json({
-            error: "Only an admin can perform these actions"
-        })
+    } catch(err) {
+        console.log(err)
+        return res.status(401).json({ error: "Unauthenticated / not an admin" })
     }
 }
 
